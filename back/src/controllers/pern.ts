@@ -31,6 +31,7 @@ export const exercise4 = errorWrapper(async (req, res, next) => {
 
   return res.status(200).json(resp.rows);
 });
+
 export const exercise5 = errorWrapper(async (req, res, next) => {
   const query = `--sql
      select nurse_id,nurse_name,nurse_type, sum(CASE WHEN 
@@ -44,6 +45,7 @@ export const exercise5 = errorWrapper(async (req, res, next) => {
 
   return res.status(200).json(resp.rows);
 });
+
 export const exercise6 = errorWrapper(async (req, res, next) => {
   const {} = req.body;
   const {} = req.params;
@@ -55,7 +57,7 @@ export const exercise6 = errorWrapper(async (req, res, next) => {
   from (select facility_id,nurse_id,sum(1) 
                 from nurse_hired_jobs natural join jobs 
                  group by facility_id,nurse_id
-                       having facility_id=100
+                       having facility_id=jobs.facility_id
                 
           ) as sub )                   
  order by facility_name`;
